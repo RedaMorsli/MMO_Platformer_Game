@@ -1,7 +1,10 @@
 extends KinematicBody2D
 
+signal respawn(player)
+
 const speed := 500
 const max_gravity = 1200
+const bottom_limit = 2000
 var gravity := 0
 var jump_force := -2000
 var x := 0.0
@@ -18,6 +21,8 @@ func _process(delta):
 		gravity = gravity + 10
 	vel = vel.linear_interpolate(Vector2(x * speed, y), 0.15)
 	vel = move_and_slide(vel)
+	if position.y >= bottom_limit:
+		emit_signal("respawn", self)
 
 
 func _is_on_floor() -> bool:
