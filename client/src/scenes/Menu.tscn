@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Montserrat-SemiBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/normal.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/player/Plyaer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scripts/Menu.gd" type="Script" id=5]
+[ext_resource path="res://assets/map/map.tres" type="TileSet" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 34
+font_data = ExtResource( 2 )
+
+[node name="Game" type="Node"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 851970, 4, 0, 851971, 4, 0, 851972, 4, 0, 851973, 4, 0, 851974, 4, 0, 851975, 3, 0, 851976, 3, 0, 851977, 3, 0, 851978, 3, 0, 851979, 3, 0, 851980, 3, 0, 851981, 3, 0, 851986, 3, 0, 851987, 3, 0, 851990, 3, 0, 851991, 3, 0, 851994, 3, 0, 851995, 3, 0, 851998, 3, 0, 851999, 3, 0, 852000, 3, 0, 852001, 3, 0, 852002, 3, 0, 852003, 3, 0, 852004, 5, 0, 852005, 5, 0, 852006, 5, 0, 852007, 5, 0, 852008, 5, 0 )
+
+[node name="Plyaer" parent="Level" instance=ExtResource( 4 )]
+position = Vector2( 160, 32 )
+
+[node name="Menu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 568.0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+margin_right = 960.0
+margin_bottom = 62.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Multiplayer Platformer Demo"
+align = 1
+
+[node name="Control" type="Control" parent="Menu/MarginContainer/VBoxContainer"]
+margin_top = 94.0
+margin_right = 960.0
+margin_bottom = 364.0
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 314.0
+margin_right = 960.0
+margin_bottom = 364.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.34902, 0.34902, 0.34902, 1 )
+text = "Online"
+
+[node name="LineEdit" type="LineEdit" parent="Menu/MarginContainer/VBoxContainer"]
+margin_top = 396.0
+margin_right = 960.0
+margin_bottom = 456.0
+hint_tooltip = "Enter server's IP address
+"
+custom_fonts/font = ExtResource( 3 )
+align = 1
+placeholder_text = "Enter server's IP address"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="BtnJoin" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+margin_top = 488.0
+margin_right = 960.0
+margin_bottom = 536.0
+custom_fonts/font = SubResource( 2 )
+text = "Join Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
