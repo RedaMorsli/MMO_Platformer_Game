@@ -6,7 +6,7 @@ const speed := 500
 const max_gravity = 1200
 const bottom_limit = 2000
 var gravity := 0
-var jump_force := -2000
+var jump_force := -3200
 var x := 0.0
 var y := 0.0
 var vel := Vector2.ZERO
@@ -23,7 +23,11 @@ func _process(delta):
 	vel = move_and_slide(vel)
 	if position.y >= bottom_limit:
 		emit_signal("respawn", self)
+	Server.sendPosition(get_tree().get_network_unique_id(), position)
 
 
 func _is_on_floor() -> bool:
 	return $RayCast2D.is_colliding() or $RayCast2D2.is_colliding()
+
+func set_camera(current):
+	$Camera2D.current = current

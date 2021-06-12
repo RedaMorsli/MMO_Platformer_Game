@@ -14,10 +14,15 @@ config/name="MMO Platformer Server"
 run/main_scene="res://src/scenes/Server.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Server="*res://src/sripts/Server.gd"
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

@@ -41,7 +41,6 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 limit_bottom = 1500
 limit_smoothed = true
 smoothing_enabled = true
