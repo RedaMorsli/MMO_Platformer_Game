@@ -13,7 +13,14 @@ func _ready():
 remote func updatePlayerPosition(id, pos):
 	get_node("/root/Game/Level/Players/" + str(id)).position = pos
 
+remote func set_player_info(id, player_info):
+	print("Set player info for " + str(id))
+	get_node("/root/Game/Level/Players/" + str(id)).display_name = player_info["name"]
+	get_node("/root/Game/Level/Players/" + str(id)).color = player_info["color"]
+
 func connect_to_server(ip, port):
+	get_node("/root/Game/Menu/ColorRect/MarginContainer/VBoxContainer/BtnJoin").disabled = true
+	print("Connecting to the server...")
 	net = NetworkedMultiplayerENet.new()
 	net.create_client(ip, int(port))
 	get_tree().network_peer = net
@@ -26,17 +33,27 @@ func _player_connected(id):
 		return
 	print("Player" + str(id) + " connected")
 	get_node("/root/Game").spawnPlayer(id)
+	# send player info
+	var color = get_node("/root/Game/Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/ColorPickerButton").color
+	var display_name = get_node("/root/Game/Menu/ColorRect/MarginContainer/VBoxContainer/DisplayName").text
+	var player_info = {"name" : display_name, "color" : color}
+	rpc_id(id, "set_player_info", get_tree().get_network_unique_id(), player_info)
+
 
 func _player_disconnected(id):
 	print("Player" + str(id) + " disconnected")
+	get_node("/root/Game").despawnPlayer(id)
 
 func _connected_ok():
 	print("Connected to the server successfully")
 	get_node("/root/Game").spawnSelfPlayer()
+	
 
 func _server_disconnected():
 	print("Disconnected from the server")
+	get_node("/root/Game/Menu/ColorRect/MarginContainer/VBoxContainer/BtnJoin").disabled = false
 	get_node("/root/Game").despawnSelfPlayer()
 
 func _connected_fail():
 	print("Client failed to connect")
+	get_node("/root/Game/Menu/ColorRect/MarginContainer/VBoxContainer/BtnJoin").disabled = false

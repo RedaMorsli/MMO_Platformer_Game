@@ -65,6 +65,7 @@ margin_top = 32.0
 margin_right = 992.0
 margin_bottom = 568.0
 custom_constants/separation = 32
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,11 +78,43 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Multiplayer Platformer Demo"
 align = 1
 
-[node name="Control" type="Control" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
+[node name="DisplayName" type="LineEdit" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
 margin_top = 94.0
 margin_right = 960.0
-margin_bottom = 364.0
-size_flags_vertical = 3
+margin_bottom = 149.0
+custom_fonts/font = ExtResource( 3 )
+align = 1
+max_length = 10
+placeholder_text = "Display name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
+margin_top = 181.0
+margin_right = 960.0
+margin_bottom = 245.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_top = 9.0
+margin_right = 862.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player Color"
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 866.0
+margin_right = 960.0
+margin_bottom = 64.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+margin_right = 94.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Change color"
+edit_alpha = false
 
 [node name="Label2" type="Label" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
 visible = false
@@ -92,8 +125,14 @@ custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.34902, 0.34902, 0.34902, 1 )
 text = "Online"
 
+[node name="Control" type="Control" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
+margin_top = 277.0
+margin_right = 960.0
+margin_bottom = 369.0
+size_flags_vertical = 3
+
 [node name="EditNetInfo" type="LineEdit" parent="Menu/ColorRect/MarginContainer/VBoxContainer"]
-margin_top = 396.0
+margin_top = 401.0
 margin_right = 960.0
 margin_bottom = 456.0
 hint_tooltip = "Enter server's IP address
