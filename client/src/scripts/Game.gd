@@ -3,9 +3,9 @@ extends Node
 var player = preload("res://src/scenes/Player.tscn")
 var player_other = preload("res://src/scenes/PlayerTemplate.tscn")
 
-onready var editNetInfo = $Menu/ColorRect/MarginContainer/VBoxContainer/EditNetInfo
-onready var colorPick = $Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/ColorPickerButton
-onready var editName = $Menu/ColorRect/MarginContainer/VBoxContainer/DisplayName
+onready var editNetInfo = $GUI/Menu/ColorRect/MarginContainer/VBoxContainer/EditNetInfo
+onready var colorPick = $GUI/Menu/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/ColorPickerButton
+onready var editName = $GUI/Menu/ColorRect/MarginContainer/VBoxContainer/DisplayName
 
 func _on_BtnJoin_pressed():
 	var ip_port = editNetInfo.text.split(":")
@@ -15,7 +15,7 @@ func _on_BtnJoin_pressed():
 	
 
 func spawnSelfPlayer():
-	$Menu.visible = false
+	$GUI/Menu.visible = false
 	var new_player = player.instance()
 	new_player.display_name = editName.text
 	new_player.color = colorPick.color
@@ -25,6 +25,7 @@ func spawnSelfPlayer():
 	new_player.set_camera(true)
 	new_player.connect("respawn", $Level,"_on_Player_respawn")
 	$Level/Players.add_child(new_player)
+	$GUI/Ping.start()
 
 func spawnPlayer(id):
 	if get_tree().get_network_unique_id() == id or id == 1:
@@ -41,4 +42,6 @@ func despawnPlayer(id):
 func despawnSelfPlayer():
 	for player in get_node("/root/Game/Level/Players").get_children():
 		player.queue_free()
-	$Menu.visible = true
+	$GUI/Menu.visible = true
+	$GUI/Ping.stop()
+

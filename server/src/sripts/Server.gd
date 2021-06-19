@@ -28,11 +28,15 @@ func stop_server():
 remote func updatePlayerPosition(id, pos):
 	pass
 
+remote func ping(id):
+	rpc_unreliable_id(id, "pong")
+
 func _peer_connected(id):
 	print("Player" + str(id) + " joined the game")
 
-func _peer_disconnected(id):
+func _player_disconnected(id):
 	print("Player" + str(id) + " left the game")
 
 func _connected_fail():
 	print("Failed start server")
+

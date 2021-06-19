@@ -46,3 +46,6 @@ func _is_on_floor() -> bool:
 
 func set_camera(current):
 	$Camera2D.current = current
+
+func updatePing(time):
+	$Ping.updatePing(time)
